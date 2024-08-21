@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KnifeMovement : MonoBehaviour
 {
     public GameObject Carrot;
+    public Text text;
 
     private Animator CarrotAnimator;
     private Vector3 CurrentPosition;
@@ -25,6 +27,11 @@ public class KnifeMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(CutCount<4){
+            text.text = "Press DownArrow To Cut"; 
+        }else{
+            text.text = "Press LeftArrow To Put In Bakset";
+        }
        // CurrentPosition = transform.position;
 
         if(Input.GetKeyDown(KeyCode.DownArrow) && !cutting && CutCount<4){
@@ -33,8 +40,8 @@ public class KnifeMovement : MonoBehaviour
             //transform.position = CurrentPosition; 
         }
         if(cutting){
-            transform.position += new Vector3(0f, -0.03f, 0f);
-            if(Time.time - CutStartTime >= 1.5f){
+            transform.position += new Vector3(0f, -0.05f, 0f);
+            if(Time.time - CutStartTime >= 1.7f){
                 if(CutCount == 1){
                     CarrotAnimator.SetTrigger("Cut1Trigger");
                 }else if(CutCount == 2){
@@ -51,7 +58,7 @@ public class KnifeMovement : MonoBehaviour
         }
         
 
-        if(CutCount == 4){
+        if(CutCount == 4 && !cutting){
             if(Input.GetKeyDown(KeyCode.LeftArrow)){
                  PutCarrotInBasket();
              }

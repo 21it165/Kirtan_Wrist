@@ -21,6 +21,8 @@ public class CorrotBehaviour : MonoBehaviour
     public GameObject c4NewBakset;
     public GameObject c5NewBakset;
 
+    public LevelManager levelManager;
+
     // Start is called before the first frame update
 
     public void AdjustC1(){
@@ -58,5 +60,9 @@ public class CorrotBehaviour : MonoBehaviour
         c3NewBakset.SetActive(true);
         c4NewBakset.SetActive(true);
        c5NewBakset.SetActive(true);
+    }
+
+    public void EndSimulation(){
+        levelManager.LoadLevel("End");
     }
 }
